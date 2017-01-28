@@ -1,0 +1,44 @@
+﻿{
+  "DebugMode":  true,
+  "Servers": [
+    {
+      "Name": "Default",
+      "IP": "127.0.0.1",
+      "Port": 8999,
+      "Locations": [
+        {
+          "Path": "/",
+          "Action": "Serve",
+          "Target": "www/"
+        },
+        {
+          "Path": "/proxy",
+          "Action": "Proxy",
+          "Target": "127.0.0.1:9999"
+        },
+        {
+          "Path": "/redirect",
+          "Action": "Redirect",
+          "Target": "/"
+        }
+      ]
+    },
+    {
+      "Name": "Additional",
+      "IP": "127.0.0.1",
+      "Port": 9999,
+      "Locations": [
+        {
+          "Path": "/",
+          "Action": "Redirect",
+          "Target": "/test"
+        },
+        {
+          "Path": "/test",
+          "Action": "Serve",
+          "Target": "www/"
+        }
+      ]
+    }
+  ]
+}
