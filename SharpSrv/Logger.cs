@@ -23,7 +23,32 @@ namespace DSpeckmann.SharpSrv
                 return;
             }
             
-            Console.WriteLine("[{0}] [{1}]{2} {3}", DateTime.Now, level, (server == null) ? "" : string.Format(" [{0}]", server), message);
+            Console.Write("[{0}] ", DateTime.Now);
+            ConsoleColor oldColor = Console.ForegroundColor;
+            switch(level)
+            {
+                case LogLevel.ACCESS:
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+                case LogLevel.INFO:
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
+                case LogLevel.ERROR:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+                case LogLevel.DEBUG:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
+            }
+            Console.Write("[{0}] ", level);
+            Console.ForegroundColor = oldColor;
+            if(!string.IsNullOrEmpty(server))
+            {
+                Console.Write("[{0}] ", server);
+            }
+            Console.WriteLine("{0}", message);
+            
+
             // TODO: Write to log files
         }
     }
